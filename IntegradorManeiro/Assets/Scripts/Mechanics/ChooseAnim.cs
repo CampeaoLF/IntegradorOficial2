@@ -1,15 +1,11 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class ChooseAnim : MonoBehaviour
+using Fusion;
+public class ChooseAnim : NetworkBehaviour
 {
-    private string animation;
+    [Networked]private string animation { get; set; }
     private bool value;
 
     public List<string> bottonSpecial = new List<string>();
