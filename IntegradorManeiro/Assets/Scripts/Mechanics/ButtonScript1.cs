@@ -25,17 +25,10 @@ public class ButtonScript : NetworkBehaviour
 
     }
 
-
-    public override void FixedUpdateNetwork()
+    void ChangeScenario()
     {
-        if (player == null && Runner != null)
-        {
-            
-            player = Runner.GetPlayerObject(Runner.LocalPlayer);
-        }
         if (gameManager.score >= 5 && cenario[0])
         {
-
             var scenarioAtual = gameManager.background.GetComponent<SpriteRenderer>();
             scenarioAtual.sprite = cenario[0];
         }
@@ -44,6 +37,17 @@ public class ButtonScript : NetworkBehaviour
             var scenarioAtual = gameManager.background.GetComponent<SpriteRenderer>();
             scenarioAtual.sprite = cenario[1];
         }
+    }
+
+
+    public override void FixedUpdateNetwork()
+    {
+        if (player == null && Runner != null)
+        {
+            
+            player = Runner.GetPlayerObject(Runner.LocalPlayer);
+        }
+        ChangeScenario();
 
 
 

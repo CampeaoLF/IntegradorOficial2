@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : NetworkBehaviour
 {
-    [Networked] public int score {get; set;}
+    [Networked, OnChangedRender(nameof(UpdateScore))] public int score {get; set;}
     [SerializeField] public GameObject background;
     [SerializeField] public TextMeshProUGUI scoreNumber;
     [SerializeField] public Button special;
@@ -16,12 +16,21 @@ public class GameManager : NetworkBehaviour
         
     }
 
+    void UpdateScore()
+    {
+        scoreNumber.text = score.ToString();
+    }
+
+
 
     public override void FixedUpdateNetwork()
     {
-        scoreNumber.text = score.ToString();
+        if (HasStateAuthority == false)
+            return;
 
+       
         EnabledMoveSpecial();
+        UpdateScore();
     }
 
     
